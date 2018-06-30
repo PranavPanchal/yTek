@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+
+        <head>
+<!-- Plotly.js -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        </head>
+        <body>
+        <!-- Plotly chart will be drawn inside this DIV -->
+        <div id="graph"></div>
+       
+        <script>
+        /* JAVASCRIPT CODE GOES HERE */
+       
+                var stateArray = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+    
+                var optionalInsured = [];
+                var averageArray = [];    
+                var sum = 0;
+
+
+                    x="";
+                for( var i = 0; i < stateArray.length; i++ ){
+
+                        url1 = "https://v3v10.vitechinc.com/solr/v_participant/select?indent=on&q=*:*&wt=json{!join from=state from=v_participant_detail to=state}state:"+x+"state asc"
+                    
+
+                        $.getJSON(url3, function(data){
+                            var qresult = data.response.docs;
+
+                            // console.log(data);
+                            for (var x = 0; x < qresult.length; x ++){
+
+                              optionalInsured += qresult[x]['OPTIONAL_INSURED'] + ",";
+                              sum += optionalInsured[x];
+
+                                 }
+                        });
+
+                        $('#averageArray').append(sum/(optionalInsured.length));
+                }
+
+
+                    var data = [{
+                        type: 'scatter',
+                        x: stateArray,
+                        y: optionalInsured,
+                        mode: 'markers',
+                        transforms: [{
+                            type: 'aggregate',
+                            groups: stateArray,
+                            aggregations: [
+                                {target: 'y', func: 'avg', enabled: true},
+                                ]
+                        }]
+                    }]
+
+                    layout = {
+                        title: 'Plotly Aggregations',
+                        xaxis: {title: 'States'},
+                        yaxis: {title: 'Average Opt In', range: [0,49]},
+                        height: 600,
+                        width: 900,
+                        updatemenus: [{
+                                x: 0.85,
+                                y: 1.15,
+                                xref: 'paper',
+                                yref: 'paper',
+                                yanchor: 'top',
+                                active: 0,
+                                showactive: false,
+                        }],
+                        buttons: [{
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'avg'],
+                            label: 'Avg'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'sum'],
+                            label: 'Sum'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'min'],
+                            label: 'Min'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'max'],
+                            label: 'Max'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'mode'],
+                            label: 'Mode'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'median'],
+                            label: 'Median'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'count'],
+                            label: 'Count'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'stddev'],
+                            label: 'Std.Dev'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'first'],
+                            label: 'First'
+                        }, {
+                            method: 'restyle',
+                            args: ['transforms[0].aggregations[0].func', 'last'],
+                            label: 'Last'
+                        }]
+                }
+
+                Plotly.plot('graph', data, layout)     
+
+
+        </script>
+        </body>
+
+        </html>
+

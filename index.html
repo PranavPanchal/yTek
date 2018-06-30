@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+
+	<title>Vitech</title>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="styling/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/script.js"></script>
+        <!-- Access the json Data: -->       
+        <script src="scripts/dataAccess.js"></script>
+        <!-- Plotly : -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+    </head>
+
+	<body>
+		<div id="nav-wrap">
+			<ul id="nav">
+				<li style="position: absolute; left:-200px; top:0px;"><img src="images/logo.png" height="7%" width="7%"></li>
+                <li><a href="index.html#home">Home</a></li>
+                <li onmousedown="search()"><a href ="index.html#about">About</a></li>
+				<li><a href="index.html#input">Input</a></li>
+				<li><a href="index.html#results">Results</a></li>
+			</ul>
+           <!-- <input type="button" value="Search" onclick="search()" >-->
+		</div>
+
+		<div class="fixed-bg bg-1" id="home" style="">
+			<h1 style="top:40%; background: rgba(0, 0, 0, 0.5);padding:50px 15px; border-radius:10px; text-align:center;">Vitech Systems Group</h1>
+            <!-- <input class="test-button" type="button" value="Search" onclick="search()"> </input> -->
+		</div> 
+
+		<div class="plain-bg" id="about">
+			<h1 style=" ">About</h1>
+			<p>The project was designed to be a website that a prospective insurance purchaser could use. It should have included graphs and diagrams that compared different insurance factors. It also would have included machine learning to help users predict how much their insurance quote would be based off of 1.4M people’s insurance data.
+			The project was designed to be a website that a prospective insurance purchaser could use. It includes graphs and diagrams that compare different insurance factors. It also includes machine learning to help users predict how much their insurance quote will be based off of 1.4M people’s insurance data.</p>
+		</div>
+
+		<div class="fixed-bg bg-2" id="input">
+			<h1 style="top:50px; font-size: 3.5em; background: rgba(0, 0, 0, 0.5); padding:15px 15px; border-radius:10px; text-align:center;">User Input</h1>
+			<div class="form-wrap">
+				<form class="reg-form user-input" method="post" action="form-process.php">
+					<div class="row">
+						<div class="col-md-4">
+							<h5 class="form-heading">Full Name*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="e.g. John Doe">
+						</div>
+						<div class="col-md-4">
+							<h5 class="form-heading">Sex*</h5>
+							<input required type="radio" id="form-radio" name="wl_program" value="Toddler"> Male
+						  	<input required type="radio" id="form-radio" name="wl_program" value="Toddler"> Female
+						</div>
+						<div class="col-md-4">
+							<h5 class="form-heading">Date of Birth*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="(MM/DD/YYYY)">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<h5 class="form-heading">Address*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="e.g.">
+						</div>
+						<div class="col-md-4">
+							<h5 class="form-heading">City*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="e.g. Atlanta">
+						</div>
+						<div class="col-md-4">
+							<h5 class="form-heading">State*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="e.g. Georgia">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<h5 class="form-heading">Additional People*</h5>
+							<input required type="text" class="form-input" name="v_date" placeholder="i.e. # of people attached to plan">
+						</div>
+						<div class="col-md-4">
+							<h5 class="form-heading">Do you smoke*</h5>
+							<input required type="radio" id="form-radio" name="wl_program" value="Toddler"> Yes
+						  	<input required type="radio" id="form-radio" name="wl_program" value="Toddler"> No
+						</div>
+					</div>
+					<div class="row">
+						<h5 class="form-heading" style="margin-left:15px">Precondition Risk Factor*</h5>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Chronic viral hepatitis B without delta-agent</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Ataxic cerebral palsy</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Diarrhea</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Tachycardia</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Obstructive Sleep Apnea</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Unspecified fracture of specified metacarpal bone with unspecified laterality</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Other abnormalities of heart beat</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">Type 2 diabetes mellitus with hyperglycemia</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">HIV disease resulting in other bacterial infections</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-input" name="">
+								<option value="">cough with hemorrhage</option>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+					</div>
+					<a href="index.html#home"><input type="submit" class="form-button" value="Submit" name="volunteer_application"></a>
+				</form>
+			</div>
+		</div>
+		<div class="plain-bg" id="results" style="background: #ECECEC; height:75%;">
+			<h1 style="color:#666666;">Results</h1>
+		</div>
+
+	</body>
+
+</html>
